@@ -27,8 +27,88 @@ class _MountainTrackingHomeViewState extends State<MountainTrackingHomeView> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              appHeader(tS),
-              invitationCard(tS),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          'assets/images/me.jpg',
+                          fit: BoxFit.cover,
+                          height: 35,
+                          width: 35,
+                        )),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Hello there', style: tS.caption),
+                            Text(
+                              'Batara Kanaydo',
+                              style: tS.subtitle1?.apply(fontWeightDelta: 2),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    const Icon(
+                      Icons.notifications_on_rounded,
+                      color: Colors.grey,
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
+                child: Container(
+                  decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(15)),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          children: [
+                            const CircleAvatar(
+                              radius: 15,
+                              backgroundImage: AssetImage('assets/images/me.jpg'),
+                              backgroundColor: Colors.transparent,
+                            ),
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            Expanded(
+                              child: Text('You have been invited to join a hike to Mt. Elbert with robert and 4 others 🤟🏻',
+                                  style: tS.bodyText1?.apply(color: Colors.black)),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Divider(
+                        height: 1,
+                      ),
+                      IntrinsicHeight(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: Text('Cancel', style: tS.bodyText2?.apply(color: Colors.black, fontWeightDelta: 2)),
+                            ),
+                            const VerticalDivider(),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: Text('Accept Invite', style: tS.bodyText2?.apply(color: Colors.black, fontWeightDelta: 2)),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
@@ -99,12 +179,6 @@ class _MountainTrackingHomeViewState extends State<MountainTrackingHomeView> {
     } else if (index == count) {
       commonPadding = const EdgeInsets.only(left: 8, right: 16, top: 16, bottom: 16);
     }
-    List<String> _images = [
-      'https://images.unsplash.com/photo-1593642532842-98d0fd5ebc1a?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2250&q=80',
-      'https://images.unsplash.com/photo-1612594305265-86300a9a5b5b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1612626256634-991e6e977fc1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1712&q=80',
-      'https://images.unsplash.com/photo-1593642702749-b7d2a804fbcf?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80'
-    ];
     return Padding(
       padding: commonPadding,
       child: Container(
@@ -169,9 +243,9 @@ class _MountainTrackingHomeViewState extends State<MountainTrackingHomeView> {
                   children: [
                     ImageStack(
                       imageRadius: 30,
-                      imageList: _images,
-                      totalCount: _images.length,
-                      imageCount: _images.length,
+                      imageList: mountain.teams,
+                      totalCount: mountain.teams.length,
+                      imageCount: mountain.teams.length,
                       imageBorderColor: Colors.white,
                     ),
                     Text(
@@ -194,94 +268,6 @@ class _MountainTrackingHomeViewState extends State<MountainTrackingHomeView> {
               ],
             ),
           )),
-    );
-  }
-
-  Widget invitationCard(TextTheme tS) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 16),
-      child: Container(
-        decoration: BoxDecoration(color: Colors.grey[200], borderRadius: BorderRadius.circular(15)),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  const CircleAvatar(
-                    radius: 15,
-                    backgroundImage: AssetImage('assets/images/me.jpg'),
-                    backgroundColor: Colors.transparent,
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Expanded(
-                    child: Text('You have been invited to join a hike to Mt. Elbert with robert and 4 others 🤟🏻',
-                        style: tS.bodyText1?.apply(color: Colors.black)),
-                  ),
-                ],
-              ),
-            ),
-            const Divider(
-              height: 1,
-            ),
-            IntrinsicHeight(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text('Cancel', style: tS.bodyText2?.apply(color: Colors.black, fontWeightDelta: 2)),
-                  ),
-                  const VerticalDivider(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    child: Text('Accept Invite', style: tS.bodyText2?.apply(color: Colors.black, fontWeightDelta: 2)),
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget appHeader(TextTheme tS) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        children: [
-          ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                'assets/images/me.jpg',
-                fit: BoxFit.cover,
-                height: 35,
-                width: 35,
-              )),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Hello there', style: tS.caption),
-                  Text(
-                    'Batara Kanaydo',
-                    style: tS.subtitle1?.apply(fontWeightDelta: 2),
-                  )
-                ],
-              ),
-            ),
-          ),
-          const Icon(
-            Icons.notifications_on_rounded,
-            color: Colors.grey,
-          )
-        ],
-      ),
     );
   }
 }
